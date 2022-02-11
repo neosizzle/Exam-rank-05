@@ -29,35 +29,30 @@ void	Warlock::introduce(void) const
 Warlock::~Warlock()
 {
 	std::cout << this->_name << ": My job here is done!\n";
+	delete this->_spellbook;
 }
 
 Warlock::Warlock(std::string name, std::string title)
 {
 	this->_name = name;
 	this->_title = title;
+	this->_spellbook = new SpellBook();
 	std::cout << name << ": This looks like another boring day.\n";
 }
 
 void	Warlock::learnSpell(ASpell *spell)
 {
-	std::pair<std::string, ASpell *> pair;
-
-	pair = std::make_pair(spell->getName(), spell->clone());
-	this->spells.insert(pair);
+	this->_spellbook->learnSpell(spell);
 }
 
 void	Warlock::forgetSpell(std::string spell_str)
 {
-	ASpell *spell = this->spells[spell_str];
-
-	if (spell)
-		delete spell;
-	this->spells.erase(spell_str);
+	this->_spellbook->forgetSpell(spell_str);
 }
 
 void	Warlock::launchSpell(std::string spell_str, ATarget &target)
 {
-	ASpell *spell = this->spells[spell_str];
+	ASpell *spell = this->_spellbook->createSpell(spell_str);
 
 	if (spell)
 		spell->launch(target);

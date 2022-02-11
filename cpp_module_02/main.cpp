@@ -1,21 +1,34 @@
 #include "Warlock.hpp"
 #include "Fwoosh.hpp"
-#include "Dummy.hpp"
+#include "TargetGenerator.hpp"
+#include "Polymorph.hpp"
+#include "ATarget.hpp"
+#include "Fireball.hpp"
+#include "BrickWall.hpp"
 #include <iostream>
 #include <ostream>
+
 int main()
 {
-  Warlock richard("Richard", "the Titled");
+  Warlock richard("Richard", "foo");
+  richard.setTitle("Hello, I'm Richard the Warlock!");
+  BrickWall model1;
 
-  Dummy bob;
-  Fwoosh* fwoosh = new Fwoosh();
+  Polymorph* polymorph = new Polymorph();
+  TargetGenerator tarGen;
 
-  richard.learnSpell(fwoosh);
+  tarGen.learnTargetType(&model1);
+  richard.learnSpell(polymorph);
+
+  Fireball* fireball = new Fireball();
+
+  richard.learnSpell(fireball);
+
+  ATarget* wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
 
   richard.introduce();
-  richard.launchSpell("Fwoosh", bob);
-
-  richard.forgetSpell("Fwoosh");
-  richard.launchSpell("Fwoosh", bob);
-  delete fwoosh;
+  richard.launchSpell("Polymorph", *wall);
+  richard.launchSpell("Fireball", *wall);
+  delete polymorph;
+  delete fireball;
 }

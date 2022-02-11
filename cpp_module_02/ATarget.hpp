@@ -9,6 +9,7 @@ class ATarget
 		std::string _type;
 
 	public:
+		virtual ~ATarget();
 		ATarget();
 		ATarget(std::string type) : _type(type){};
 		ATarget(const ATarget &other);

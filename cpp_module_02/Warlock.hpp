@@ -4,6 +4,7 @@
 #include <map>
 #include "ASpell.hpp"
 #include "ATarget.hpp"
+#include "SpellBook.hpp"
 //constr
 //destr
 //copy
@@ -13,7 +14,7 @@ class Warlock
 	private :
 		std::string _name;
 		std::string	_title;
-		std::map<std::string, ASpell *> spells;
+		SpellBook *_spellbook;
 
 		Warlock();
 		Warlock(Warlock const &warlock);

@@ -5,6 +5,11 @@ ATarget::ATarget()
 
 }
 
+ATarget::~ATarget()
+{
+
+}
+
 ATarget::ATarget(const ATarget &other)
 {
 	*this = other;
